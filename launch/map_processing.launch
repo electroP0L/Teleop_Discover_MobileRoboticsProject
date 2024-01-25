@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="map_processing" pkg="teleop_discover" type="map_process_node" output="screen" />    
+    <node name="ulimit_script" pkg="teleop_discover" type="ulimit.sh" output="screen" />
+</launch>

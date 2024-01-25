@@ -104,7 +104,7 @@ private:
         }
       }
 
-      applyOpening(grid, AstarGrid, 10);
+      applyOpening(grid, AstarGrid, 6);
     }
     else
     {

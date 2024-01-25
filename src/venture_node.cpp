@@ -28,7 +28,7 @@ class Venture {
   nav_msgs::Path base_path;
 
   double L = 0.4; //m
-  double w_limit = 0.5; //rad/s
+  double w_limit = 0.25; //rad/s
   ros::Duration dt; //s
   ros::Time previous_time;
   bool first_waypoint = true;
@@ -41,9 +41,12 @@ class Venture {
 
 
   void path_cb(const nav_msgs::Path::ConstPtr& pathmsg){
-    base_path = *pathmsg;
-    first_waypoint = true;
-    SpeedProcessing();
+    if (pathmsg->poses.size()!=0){
+      base_path = *pathmsg;
+      first_waypoint = true;
+      SpeedProcessing();
+    }
+    else {ROS_INFO("Empty path!");}
     return;
   }
 
