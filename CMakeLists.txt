@@ -140,6 +140,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(${PROJECT_NAME}_teleop_node src/teleop_discover_node.cpp)
+add_executable(${PROJECT_NAME}_automatic_node src/automatic_discover_node.cpp)
 add_executable(${PROJECT_NAME}_map_process_node src/map_processing.cpp)
 add_executable(${PROJECT_NAME}_venture_node src/venture_node.cpp)
 
@@ -148,6 +149,7 @@ add_executable(${PROJECT_NAME}_venture_node src/venture_node.cpp)
 ## target back to the shorter version for ease of user use
 ## e.g. "rosrun someones_pkg node" instead of "rosrun someones_pkg someones_pkg_node"
 set_target_properties(${PROJECT_NAME}_teleop_node PROPERTIES OUTPUT_NAME teleop_node PREFIX "")
+set_target_properties(${PROJECT_NAME}_automatic_node PROPERTIES OUTPUT_NAME automatic_node PREFIX "")
 set_target_properties(${PROJECT_NAME}_map_process_node PROPERTIES OUTPUT_NAME map_process_node PREFIX "")
 set_target_properties(${PROJECT_NAME}_venture_node PROPERTIES OUTPUT_NAME venture_node PREFIX "")
 
@@ -161,6 +163,11 @@ set_target_properties(${PROJECT_NAME}_venture_node PROPERTIES OUTPUT_NAME ventur
 
  target_link_libraries(${PROJECT_NAME}_teleop_node
   ${catkin_LIBRARIES}
+  ${OpenCV_LIBRARIES}
+ )
+ target_link_libraries(${PROJECT_NAME}_automatic_node
+  ${catkin_LIBRARIES}
+  stdc++
   ${OpenCV_LIBRARIES}
  )
  target_link_libraries(${PROJECT_NAME}_map_process_node

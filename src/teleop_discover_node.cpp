@@ -6,10 +6,13 @@ class TeleopDiscover {
 public:
   TeleopDiscover(){
     ros::NodeHandle nh_;
-    // Note: 2 services : static_map & dynamic_map
     joy_sub_=nh_.subscribe<sensor_msgs::Joy>("joy", 10, &TeleopDiscover::joy_cb, this);
     cmd_pub_=nh_.advertise<geometry_msgs::Twist>("cmd_vel", 10);
   }
+
+private:
+  ros::Subscriber joy_sub_;
+  ros::Publisher cmd_pub_;
 
   void joy_cb(const sensor_msgs::Joy::ConstPtr& joymsg){
     geometry_msgs::Twist twistmsg;
@@ -17,10 +20,6 @@ public:
     twistmsg.angular.z = joymsg->axes[0];
     cmd_pub_.publish(twistmsg);
   }
-
-private:
-  ros::Subscriber joy_sub_;
-  ros::Publisher cmd_pub_;
 };
 
 
