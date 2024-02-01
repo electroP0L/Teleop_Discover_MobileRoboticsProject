@@ -37,11 +37,11 @@ public:
     
     // Attente du service
     ROS_INFO("Waiting for service");
-    ros::service::waitForService("/static_map");
+    ros::service::waitForService("/dynamic_map");
     ROS_INFO("Service available");
     
     // Création d'un objet pour appeler le service
-    client = nh_.serviceClient<nav_msgs::GetMap>("/static_map");
+    client = nh_.serviceClient<nav_msgs::GetMap>("/dynamic_map");
 
     map_pointer_sub_=nh_.subscribe<geometry_msgs::PointStamped>("clicked_point", 10, &MapProcessing::point_cb, this);
 
@@ -104,7 +104,7 @@ private:
         }
       }
 
-      applyOpening(grid, AstarGrid, 6);
+      applyOpening(grid, AstarGrid, 5);
     }
     else
     {
