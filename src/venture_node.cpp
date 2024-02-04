@@ -38,8 +38,6 @@ class Venture {
   const double Kd = 0.03;
 
 
-
-
   void path_cb(const nav_msgs::Path::ConstPtr& pathmsg){
     if (pathmsg->poses.size()!=0){
       base_path = *pathmsg;
@@ -54,7 +52,7 @@ class Venture {
     geometry_msgs::TransformStamped transform;
     
     try {
-      transform = tfBuffer.lookupTransform("map", "base_link", ros::Time(0));
+      transform = tfBuffer.lookupTransform("map", "base_link", ros::Time(0), ros::Duration(1.0));
     }
 
     catch (tf2::TransformException &ex){
@@ -178,7 +176,6 @@ class Venture {
     } else if (omega <= -w_limit) {
         omega = -w_limit;
     }
-
 
     return std::make_tuple(theta, omega);
   }

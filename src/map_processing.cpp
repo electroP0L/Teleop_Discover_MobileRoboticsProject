@@ -38,19 +38,15 @@ public:
     // Attente du service
     ROS_INFO("Waiting for service");
     // Note: 2 services : static_map & dynamic_map
-    ros::service::waitForService("/static_map");
+    ros::service::waitForService("/dynamic_map");
     ROS_INFO("Service available");
     
     // Création d'un objet pour appeler le service
-    client = nh_.serviceClient<nav_msgs::GetMap>("/static_map");
+    client = nh_.serviceClient<nav_msgs::GetMap>("/dynamic_map");
 
     map_pointer_sub_=nh_.subscribe<geometry_msgs::PointStamped>("clicked_point", 10, &MapProcessing::point_cb, this);
 
     path_pub_=nh_.advertise<nav_msgs::Path>("path_map", 10);
-
-
-    RecupMap();
-    //TODO Dans certains cas, l'algo de recherche de chemin ne trouve pas la destination. à voir pourquoi
 
     // AfficheMap();
 
@@ -86,7 +82,6 @@ private:
     // Appel du service
     if (client.call(srv))
     {
-      
       // La carte est disponible dans srv.response.map
       metadata_msg = srv.response.map.info;
       width = metadata_msg.width;
@@ -114,6 +109,8 @@ private:
   }
 
   void point_cb(const geometry_msgs::PointStamped::ConstPtr& pointmsg){
+    RecupMap();
+
     geometry_msgs::PoseStamped Pose;
     Pose.pose.position.x = pointmsg->point.x;
     Pose.pose.position.y = pointmsg->point.y;
@@ -139,7 +136,7 @@ private:
     geometry_msgs::TransformStamped transform;
     
     try {
-      transform = tfBuffer.lookupTransform("map", "base_link", ros::Time(0));
+      transform = tfBuffer.lookupTransform("map", "base_link", ros::Time(0), ros::Duration(1.0));
     }
 
     catch (tf2::TransformException &ex){

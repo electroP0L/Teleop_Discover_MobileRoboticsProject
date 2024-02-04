@@ -119,6 +119,7 @@ Visualization Manager:
       Enabled: true
       Name: Map
       Topic: /gmap
+      #Topic: /map
       Unreliable: false
       Use Timestamp: false
       Value: true
