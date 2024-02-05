@@ -100,7 +100,7 @@ private:
         }
       }
 
-      applyOpening(grid, AstarGrid, 5);
+      applyOpening(grid, AstarGrid, 5.5);
     }
     else
     {

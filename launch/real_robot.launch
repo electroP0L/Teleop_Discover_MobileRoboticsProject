@@ -3,7 +3,7 @@
     <node name="teleop_node" pkg="teleop_discover" type="teleop_node" />
     <node name="joy_node" pkg="joy" type="joy_node" output="screen" />
     <!-- <node name="automatic_node" pkg="teleop_discover" type="automatic_node" output="screen" /> -->
-    <node name="gmapping" pkg="gmapping" type="slam_gmapping" output="screen" >
+    <!-- <node name="gmapping" pkg="gmapping" type="slam_gmapping" output="screen" >
         <remap from="/map" to="/gmap"/>
 
         <param name="xmin" value="-20.0"/>
@@ -11,7 +11,7 @@
         <param name="ymin" value="-10.0"/>
         <param name="ymax" value="5.0"/>
         
-    </node>
+    </node> -->
     <node name="map_server" pkg="map_server" type="map_server" args="$(find teleop_discover)/config/map.yaml" output="screen" />
 
     <!-- <node name="map_processing" pkg="teleop_discover" type="map_process_node" output="screen" /> -->

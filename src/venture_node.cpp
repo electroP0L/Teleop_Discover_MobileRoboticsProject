@@ -28,7 +28,7 @@ class Venture {
   nav_msgs::Path base_path;
 
   double L = 0.4; //m
-  double w_limit = 0.25; //rad/s
+  double w_limit = 0.4 /* 0.25 */; //rad/s
   ros::Duration dt; //s
   ros::Time previous_time;
   bool first_waypoint = true;

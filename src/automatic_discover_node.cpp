@@ -102,7 +102,7 @@ class AutomaticDiscover {
       right_mean=right_mean/(size/5);
       // ROS_INFO("right_mean: %f", right_mean);
 
-      if(front_mean>=1 && right_mean >= 0.5 && left_mean >= 0.5){
+      if(front_mean>=1 && right_mean >= 0.4 && left_mean >= 0.4){
         if(front_mean<999){
           publish_forward();
         }
@@ -192,7 +192,7 @@ class AutomaticDiscover {
       for (int row = 0; row < height; ++row) {
         for (int col = 1; col <= width; ++col) {
           int index = col + row * width;
-          if(srv.response.map.data[index] == 0){mean++;}
+          if((srv.response.map.data[index] == 0)||(srv.response.map.data[index] == 1)){mean++;}
         }
       }
       mean=(mean/(height*width))*100;
